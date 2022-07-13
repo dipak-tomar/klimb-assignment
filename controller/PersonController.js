@@ -1,5 +1,5 @@
 const excelToJson = require("convert-excel-to-json");
-const Person = require("../model/personSchema");
+const Person = require("../models/Person");
 
 module.exports = async function uploadController(req, res) {
   await Person.deleteMany({});
@@ -27,6 +27,6 @@ module.exports = async function uploadController(req, res) {
     ],
   });
   await Person.insertMany(excelData.Sheet1, { ordered: false }, () => {
-    res.redirect("http://localhost:8000/thankyou.html");
+    res.redirect("http://localhost:8000/thanks.html");
   });
 };

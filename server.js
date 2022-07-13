@@ -5,10 +5,20 @@ const multer = require("multer");
 
 require('dotenv').config();
 
+const uploadController = require("./controller/PersonController");
+
 const app = express();
+
+const upload = multer();
 
 
 app.use(express.static(path.join(__dirname, "views")));
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+});
+
+app.post("/api/upload", upload.single("file"), uploadController);
 
 const PORT = process.env.PORT || 5000;
 
